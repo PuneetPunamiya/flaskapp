@@ -14,26 +14,35 @@ app.config['MYSQL_DB'] = db['mysql_db']
 mysql = MySQL(app)
 
 @app.route('/', methods=['GET', 'POST'])
-def index():
-    if request.method == 'POST':
-        # Fetch form data
-        userDetails = request.form
-        name = userDetails['name']
-        email = userDetails['email']
-        cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO users(name, email) VALUES(%s, %s)",(name, email))
-        mysql.connection.commit()
-        cur.close()
-        return redirect('/users')
-    return render_template('index.html')
+# def index():
+#     if request.method == 'POST':
+#         # Fetch form data
+#         userDetails = request.form
+#         name = userDetails['name']
+#         email = userDetails['email']
+#         cur = mysql.connection.cursor()
+#         cur.execute("INSERT INTO users(name, email) VALUES(%s, %s)",(name, email))
+#         mysql.connection.commit()
+#         cur.close()
+#         return redirect('/users')
+#     return render_template('index.html')
 
-@app.route('/users')
-def users():
+# @app.route('/users')
+# def users():
+#     cur = mysql.connection.cursor()
+#     resultValue = cur.execute("SELECT * FROM users")
+#     if resultValue > 0:
+#         userDetails = cur.fetchall()
+#         return render_template('users.html',userDetails=userDetails)
+
+@app.route('/emp')
+def emp():
     cur = mysql.connection.cursor()
-    resultValue = cur.execute("SELECT * FROM users")
+    resultValue = cur.execute("SELECT * FROM emp")
     if resultValue > 0:
         userDetails = cur.fetchall()
-        return render_template('users.html',userDetails=userDetails)
+        print(userDetails)
+        # return render_template('users.html',userDetails=userDetails)
 
 if __name__ == '__main__':
     app.run(debug=True)
