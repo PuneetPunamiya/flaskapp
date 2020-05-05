@@ -1,4 +1,4 @@
-Clone this project
+Flask App: Clone this project
 
 pip3 install -r requirements.txt
 
